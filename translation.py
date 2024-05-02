@@ -20,6 +20,8 @@ def main():
     # 現在の日付を取得
     current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     output_file = f"./out/script_{current_time}.txt"
+    # 改行を取り除くか
+    one_line = False
     #
     # settings
     #
@@ -37,8 +39,9 @@ def main():
         with open(output_file, mode='w', encoding='utf-8') as output_file:
                 # strip():前後の空白を取り除く
                 input_text = input_text.strip()
-                # 改行削除
-                input_text = input_text.replace('\n', '')
+                if one_line:
+                    # 改行削除
+                    input_text = input_text.replace('\n', '')
                 # 翻訳
                 translated_text = translator.translate_text(input_text, target_lang=target_lang).text
                 # 出力
